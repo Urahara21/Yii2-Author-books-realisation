@@ -46,8 +46,10 @@ $config = [
         'db'           => $db,
         'urlManager'   => [
             'enablePrettyUrl' => true,
+            'enableStrictParsing' => true,
             'showScriptName'  => false,
             'rules'           => [
+                // Admin routes
                 'admin/books'                   => 'admin/books/index',
                 'admin/books/<id:\d+>'          => 'admin/books/update',
                 'admin/books/create'            => 'admin/books/update',
@@ -56,8 +58,23 @@ $config = [
                 'admin/authors/<id:\d+>'        => 'admin/authors/update',
                 'admin/authors/create'          => 'admin/authors/update',
                 'admin/authors/delete/<id:\d+>' => 'admin/authors/delete',
+
+                // Public routes
                 'books'                         => 'books/index',
                 'authors'                       => 'authors/index',
+
+                // API routes
+                [
+                    'class'         => 'yii\rest\UrlRule',
+                    'controller'    => ['api/v1/books' => 'api/book-api'],
+                    'pluralize'     => false,
+                    'extraPatterns' => [
+                        'GET list'           => 'index',
+                        'GET by-id/<id:\d+>' => 'view',
+                        'POST update'        => 'update',
+                        'DELETE id/<id:\d+>' => 'delete',
+                    ],
+                ],
             ],
         ],
     ],
