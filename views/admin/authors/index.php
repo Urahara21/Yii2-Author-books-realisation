@@ -22,7 +22,7 @@ use yii\grid\GridView;
             'class' => 'yii\grid\DataColumn',
             'label' => 'Имя',
             'value' => function ($data) {
-                return $data->name;
+                return "(ID: $data->id) " . $data->name;
             },
         ],
         [

@@ -17,12 +17,11 @@ use yii\grid\GridView;
     'dataProvider' => $dataProvider,
     'columns'      => [
         ['class' => 'yii\grid\SerialColumn'],
-
         [
             'class' => 'yii\grid\DataColumn',
             'label' => 'Название',
             'value' => function ($data) {
-                return $data->title;
+                return "(ID: $data->id) " . $data->title;
             },
         ],
         [
